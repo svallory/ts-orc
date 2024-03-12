@@ -1,8 +1,14 @@
 # ts-orc (tshy@1.12.0)
 
-This package exposes most of the functions in the [tshy](https://github.com/isaacs/tshy) under `@ts-orc/tasks` so you can create your own build process.
+This package exposes most of the functions in the [tshy](https://github.com/isaacs/tshy) under `ts-orc/tasks` so you can create your own build process.
 
-If you want a simple and direct way of compiling your typescript project to `commonjs` and `esm` you can simply use the original project. Although this project does provide a `ts-orc` command which is identical to the original, the `tshy` project is more likely to get frequent updates.
+If you want a simple and direct way of compiling your typescript project to `commonjs` and `esm` you can simply use the original project. Although this project does provide a `tso` command which is identical to the original, the `tshy` project is more likely to get frequent updates.
+
+If you decide to use this one, you can install it with:
+
+```
+npm i -D ts-orc
+```
 
 I'll at least write my own documentation but, for now, here's `tshy` original README.
 

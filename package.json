@@ -1,6 +1,6 @@
 {
   "name": "ts-orc",
-  "version": "1.12.0",
+  "version": "1.12.0-orc.1",
   "description": "Orchestrate TypeScript Compilations and npm package builds (based on tshy)",
   "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
   "contributors": [
@@ -9,7 +9,8 @@
   "license": "BlueOak-1.0.0",
   "type": "module",
   "bin": {
-    "ts-orc": "./dist/esm/cli.js"
+    "ts-orc": "./dist/esm/cli.js",
+    "tso": "./dist/esm/cli.js"
   },
   "files": [
     "dist"
