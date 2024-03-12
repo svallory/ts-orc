@@ -3,6 +3,9 @@
   "version": "1.12.0",
   "description": "Orchestrate TypeScript Compilations and npm package builds (based on tshy)",
   "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
+  "contributors": [
+    "Saulo Vallory <saulo@toki.life> (https://about.me/saulovallory)"
+  ],
   "license": "BlueOak-1.0.0",
   "type": "module",
   "bin": {
