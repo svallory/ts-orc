@@ -73,11 +73,18 @@
     ],
     "exports": {
       "./package.json": "./package.json",
+      "./tasks": "./src/tasks.ts",
       ".": "./src/index.ts"
     }
   },
   "exports": {
     "./package.json": "./package.json",
+    "./tasks": {
+      "import": {
+        "types": "./dist/esm/tasks.d.ts",
+        "default": "./dist/esm/tasks.js"
+      }
+    },
     ".": {
       "import": {
         "types": "./dist/esm/index.d.ts",
