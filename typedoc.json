@@ -1,8 +1,13 @@
 {
   "tsconfig": "./.tshy/esm.json",
-  "entryPoints": ["./src/**/*.+(ts|tsx|mts|cts)"],
+  "entryPoints": [
+    "./src/index.ts",
+    "./src/tasks.ts"
+  ],
   "navigationLinks": {
-    "GitHub": "https://github.com/isaacs/tshy",
-    "isaacs projects": "https://isaacs.github.io/"
-  }
+    "GitHub": "https://github.com/svallory/ts-orc",
+    "About me": "https://about.me/saulovallory"
+  },
+  "plugin": ["@mxssfd/typedoc-theme"],
+  "theme": "my-theme"
 }

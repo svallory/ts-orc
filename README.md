@@ -1,4 +1,12 @@
-# tshy - TypeScript HYbridizer
+# ts-orc (tshy@1.12.0)
+
+This package exposes most of the functions in the [tshy](https://github.com/isaacs/tshy) under `@ts-orc/tasks` so you can create your own build process.
+
+If you want a simple and direct way of compiling your typescript project to `commonjs` and `esm` you can simply use the original project. Although this project does provide a `ts-orc` command which is identical to the original, the `tshy` project is more likely to get frequent updates.
+
+I'll at least write my own documentation but, for now, here's `tshy` original README.
+
+## tshy - TypeScript HYbridizer
 
 Hybrid (CommonJS/ESM) TypeScript node package builder. Write
 modules that Just Work in ESM and CommonJS, in easy mode.
@@ -9,7 +17,7 @@ and CommonJS variants, [providing the full strength of
 TypeScript’s checking for both output
 formats](https://twitter.com/atcb/status/1702069237710479608).
 
-## USAGE
+### USAGE
 
 Install tshy:
 
@@ -36,7 +44,7 @@ The built files will end up in `./dist/esm` (ESM) and
 Your `exports` will be edited to reflect the correct module entry
 points.
 
-## Dual Package Hazards
+### Dual Package Hazards
 
 If you are exporting both CommonJS and ESM forms of a package,
 then it is possible for both versions to be loaded at run-time.
@@ -72,7 +80,7 @@ exporting an ESM wrapper that re-exports the CommonJS code, or
 isolating state into a single module used by both CommonJS and
 ESM. While these strategies do work, they are not what tshy does.
 
-### What Does tshy Do Instead?
+#### What Does tshy Do Instead?
 
 It builds your program twice, into two separate folders, and sets
 up exports. By default, the ESM and CommonJS forms live in
@@ -81,7 +89,7 @@ Module Hazard" as a simple fact of life.
 
 Which it is.
 
-### "Dual Module Hazard" is a fact of life anyway
+#### "Dual Module Hazard" is a fact of life anyway
 
 Since the advent of npm, circa 2010, module in node have been
 potentially duplicated in the dependency graph. Node's nested
@@ -115,7 +123,7 @@ consider if you would be better off with a type check function or
 something other than relying on `instanceof`. There are certainly
 cases where it's unavoidable, but it can be tricky to work with.
 
-### Module Local State
+#### Module Local State
 
 There are some cases where you need something to be the _same
 value_ whether loaded with CommonJS or ESM, but not necessarily
@@ -170,7 +178,7 @@ export const state: Record<string, any> = {}
 
 See below for more on using dialect specific polyfills.
 
-## Handling Default Exports
+### Handling Default Exports
 
 `export default` is the bane of hybrid TypeScript modules.
 
@@ -233,7 +241,7 @@ namespace like `mything.SomeType`.
 But in almost all cases, it's much simpler to just use named
 exports exclusively.
 
-## Configuration
+### Configuration
 
 Mostly, this just uses opinionated convention, and so there is
 very little to configure.
@@ -244,7 +252,7 @@ CommonJS and `./dist/esm` for ESM.
 There is very little configuration for this, but a lot of things
 _can_ be configured.
 
-### `exports`
+#### `exports`
 
 By default, if there is a `src/index.ts` file, then that will be
 set as the `"."` export, and the `package.json` file will be
@@ -314,7 +322,7 @@ just be passed through as-is.
 }
 ```
 
-### Package `#imports`
+#### Package `#imports`
 
 You can use `"imports"` in your package.json, and it will be
 handled in the following ways.
@@ -410,7 +418,7 @@ _If a `tshy.imports` is present (a previous iteration of this
 behavior), it will be merged into the top-level `"imports"` and
 deleted from the `tshy` section._
 
-### Making Noise
+#### Making Noise
 
 On failure, all logs will be printed.
 
@@ -420,7 +428,7 @@ To print error logs and a `success!` message at the end, set
 To print debugging and other extra information, set
 `TSHY_VERBOSE=2` in the environment.
 
-### Selecting Dialects
+#### Selecting Dialects
 
 You can tell tshy which dialect you're building for by setting
 the `dialects` config to an array of strings:
@@ -437,7 +445,7 @@ The default is `["esm", "commonjs"]` (ie, both of them). If you
 set it to just one, then only that dialect will be built and
 exported.
 
-### Suppressing the self-link
+#### Suppressing the self-link
 
 See below about **Local Package `exports`** for an explanation of
 what this is.
@@ -457,7 +465,7 @@ If the `selfLink` config is not explicitly set, and creating the
 symlink fails (common on Windows systems where `fs.symlink()` may
 require elevated permissions), then the error will be ignored.
 
-### Old Style Exports
+#### Old Style Exports
 
 Versions of node prior to 12.10.0, published in early to mid
 2016, did not have support for `exports` as a means for defining
@@ -518,7 +526,7 @@ will produce:
 }
 ```
 
-## CommonJS Dialect Polyfills
+### CommonJS Dialect Polyfills
 
 Sometimes you have to do something in different ways depending on
 the JS dialect in use. For example, maybe you have to use
@@ -557,7 +565,7 @@ export const sourceDir = new URL('.', import.meta.url)
 Then in your code, you can just `import { sourceDir } from
 './source-dir.js'` and it'll work in both builds.
 
-## Excluding from a build using `.cts` and `.mts` files
+### Excluding from a build using `.cts` and `.mts` files
 
 Files named `*.mts` will be excluded from the CommonJS build.
 
@@ -568,7 +576,7 @@ esm, use the "Dialect Switching" trick, with the ESM code living
 in `src/<whatever>.ts` and the CommonJS polyfill living in
 `src/<whatever>-cjs.cts`.
 
-## Excluding Files Entirely From All Builds
+### Excluding Files Entirely From All Builds
 
 If you want to keep some files from being processed by tshy's
 builds entirely, you can add an `exclude` `string[]` field to the
@@ -582,7 +590,7 @@ builds entirely, you can add an `exclude` `string[]` field to the
 }
 ```
 
-## Other Targets: `browser`, `deno`, etc.
+### Other Targets: `browser`, `deno`, etc
 
 If you have any other dialects that you'd like to support, you
 can list them as either `commonjsDialects` or `esmDialects`,
@@ -660,7 +668,7 @@ name (historical reasons, it was originally the only override
 supported), and that the file extension must be `cts` or `mts`
 depending on the dialect type that it is.
 
-## Atomic Builds
+### Atomic Builds
 
 Code is built in `./.tshy-build` and then copied over only if
 the build succeeds. This makes it work in monorepo cases where
@@ -672,7 +680,7 @@ If you use `"incremental": true` in your tsconfig, then this
 folder will persist, so that TSC can benefit from the
 `.tsbuildinfo` files it creates in there.
 
-## Exports Management
+### Exports Management
 
 The `exports` field in your package.json file will be updated
 based on the `tshy.exports` configuration, as described above.
@@ -690,7 +698,7 @@ If you don't provide that config, then the default is:
 }
 ```
 
-## TSConfigs
+### TSConfigs
 
 Put whatever configuration you want in `tsconfig.json`, with the
 following caveats:
@@ -711,7 +719,7 @@ provided for you.
 Then the `tsconfig.json` file will be used as the default project
 for code hints in VSCode, neovim, tests, etc.
 
-### Custom `project`
+#### Custom `project`
 
 Configure `tshy.project` if you want tshy to extend from a custom
 tsconfig file. This is often useful when you have multiple
@@ -731,7 +739,7 @@ tsconfig file. This is often useful when you have multiple
 }
 ```
 
-## `src/package.json`
+### `src/package.json`
 
 As of TypeScript 5.2, the only way to emit JavaScript to ESM or
 cjs, and also import packages using node-style `"exports"`-aware
@@ -743,7 +751,7 @@ for this purpose, and then delete it afterwards. If that file
 exists and _wasn't_ put there by `tshy`, then it will be
 destroyed.
 
-## Local Package `exports`
+### Local Package `exports`
 
 In order to facilitate local package exports, tshy will create a
 symlink to the current package temporarily in

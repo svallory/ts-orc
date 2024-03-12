@@ -1,11 +1,13 @@
 {
-  "name": "tshy",
+  "name": "ts-orc",
   "version": "1.12.0",
-  "description": "TypeScript HYbridizer - Hybrid (CommonJS/ESM) TypeScript node package builder",
+  "description": "Orchestrate TypeScript Compilations and npm package builds (based on tshy)",
   "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
   "license": "BlueOak-1.0.0",
   "type": "module",
-  "bin": "./dist/esm/index.js",
+  "bin": {
+    "ts-orc": "./dist/esm/cli.js"
+  },
   "files": [
     "dist"
   ],
@@ -48,10 +50,11 @@
     "build"
   ],
   "devDependencies": {
+    "@mxssfd/typedoc-theme": "^1.1.3",
     "@types/node": "^20.8.6",
     "prettier": "^2.8.8",
     "tap": "^18.5.2",
-    "typedoc": "^0.25.7"
+    "typedoc": "^0.25.12"
   },
   "prettier": {
     "semi": false,
